@@ -2,19 +2,19 @@
  * Created by Vova on 09.11.2015.
  */
 function Component(sSelector) {
-    var elem;
+    this.elem;
 
     this.init = function (sSelector) {
-        elem = $(sSelector);
-        if (!elem.length) {
+        this.elem = $(sSelector);
+        if (!this.elem.length) {
             console.log('Error Component init ')
         }
         else {
-            console.log('Component init OK:' + elem.length)
+            console.log('Component init OK:' + this.elem.length)
         }
     };
     this.find = function (sSelector) {
-        var res = elem.find(sSelector);
+        var res = this.elem.find(sSelector);
         if (!res.length) {
             console.log('Error Component find ' + sSelector)
         }
