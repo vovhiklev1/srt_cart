@@ -7,7 +7,7 @@ function Component(sSelector) {
     this.init = function (sSelector) {
         this.elem = $(sSelector);
         if (!this.elem.length) {
-            console.log('Error Component init ')
+            console.log('Error Component init '+ sSelector)
         }
         else {
             console.log('Component init OK:' + this.elem.length)

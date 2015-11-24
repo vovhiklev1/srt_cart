@@ -1,4 +1,3 @@
-
 <?
 header("Content-Type: text/html;charset=UTF-8");
 ?>
@@ -121,6 +120,9 @@ header("Content-Type: text/html;charset=UTF-8");
 
 <script type="text/javascript" src="../scripts/component.js"></script>
 <script type="text/javascript" src="../scripts/main.js"></script>
-<script> alert('run')</script>
+<script>
+    Cart.prototype = new Component();
+    var cart = new Cart('#goods1', '#minicart1');
+</script>
 </body>
 </html>
