@@ -44,6 +44,7 @@ function Cart(sSelector, sCartSelector) {
             f.add($(this))
         });
 
+
 ///1111
 
         /*f.elem.find('.b-order-form').submit(function (event) {
@@ -98,10 +99,10 @@ function Cart(sSelector, sCartSelector) {
 
     f.bindMinicartEvents = function (newGood) {
 
-        newGood.find('.b-good__delete').bind('click', f.del).end()
-            .find('.b-order-form__plus').bind('click', f.increaseQuantity).end()
+        newGood.find('.b-order-form__plus').bind('click', f.increaseQuantity).end()
             .find('.b-order-form__minus').bind('click', f.decreaseQuantity).end()
-            .find('.b-order-form').bind('submit', f.add).end();
+            .find('.b-order-form').bind('submit', f.del).end()
+            .find('.b-good__delete').bind('click', f.del).end();
 
 
     };
@@ -127,6 +128,7 @@ function Cart(sSelector, sCartSelector) {
      };*/
 
     f.add = function (event) {
+
         // f.order_form_plus = f.list.find('.b-order-form__plus' );
 
         var orderForm = $(event);
@@ -135,7 +137,10 @@ function Cart(sSelector, sCartSelector) {
         var addedGood = f.put(currentGood); //alert(addedGood)
 
         f.goods[addedGood.getId()] = orderForm.find('.b-order-form__quantity').val();
-        $.cookie('cartGoods', f.goods, {'expiers': 7, 'path': '/'});
+
+        f.saveCokie();
+        f.showPriceQuantity();
+
     };
 
     f.put = function (currentGood) {
@@ -208,11 +213,29 @@ function Cart(sSelector, sCartSelector) {
         return addedGood
     };
 
+    f.showPriceQuantity = function () {
+        f.total.html('0');
+        f.quantity.html('0');
+
+        var goodsQty = 0;
+        var total = 0;
+        var prices = 0;
+        $.each(f.goods, function (id, value) {
+            goodsQty++
+            total += parseInt(f.goods[id]);
+            prices += parseInt((f.elem.find('.b-good_id_' + id + ' .b-good__price').html() )) * parseInt(f.goods[id]);
+
+        });
+        f.total.html("Товаров: " + goodsQty);
+        f.quantity.html("Всего: " + prices + '$');
+
+
+    }
 
     f.load = function () {
 
         f.goods = $.cookie('cartGoods');
-        alert('load' + f.goods.length);
+        // alert('load' + f.goods.length);
         if (f.goods) {
 
             $.each(f.goods, function (good_id, quantity) {
@@ -222,11 +245,29 @@ function Cart(sSelector, sCartSelector) {
 
             })
         }
+        ;
+        f.showPriceQuantity();
     };
 
+    f.del = function (event) {
+        event.preventDefault();
+
+        var currentGood = $(this).closest('.b-good');
+        var goodDel = new Good(currentGood);
+        var goodId = goodDel.getId();
+        f.list.find('.b-good_id_' + goodId).remove();
+        f.elem.find('.b-good_id_' + goodId).removeClass('b-good_in-cart');
+        delete f.goods[goodId];
+        f.saveCokie();
+    }
+    f.saveCokie = function (id, orderForm) {
+
+        $.cookie('cartGoods', f.goods, {'expiers': 7, 'path': '/'});
+
+    }
 
     $(document).ready(function () {
-        alert('f.main')
+        //alert('f.main')
         f.main();
         f.load();
 
