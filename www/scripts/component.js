@@ -7,7 +7,7 @@ function Component(sSelector) {
     this.init = function (sSelector) {
         this.elem = $(sSelector);
         if (!this.elem.length) {
-            console.log('Error Component init '+ sSelector)
+            console.log('Error Component init ' + sSelector)
         }
         else {
             console.log('Component init OK:' + this.elem.length)
@@ -24,6 +24,23 @@ function Component(sSelector) {
         }
         ;
     };
+    this.copyData = function (oSource, oDestination, aFieldNames) {
+        $.each(aFieldNames, function (i, fieldName) {
+            var oSourceElement = oSource.find(fieldName);
+            var oDestinationElement = oDestination.find(fieldName);
+            var tagName = oSourceElement.prop('tagName');
+            if (tagName == 'IMG') { //console.log('copydata')
+                oDestinationElement.attr('src', oSourceElement.attr('src'));
+
+            }
+            else if (tagName == 'INPUT' || tagName == 'TEXTAREA') {
+                oDestinationElement.val(oSourceElement.val())
+            }
+            else {
+                oDestinationElement.html(oSourceElement.html())
+            }
+        })
+    }
 };
 //var component = new Component;
 //component.init('#form2');
