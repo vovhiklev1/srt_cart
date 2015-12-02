@@ -2,7 +2,6 @@
  * Created by Vova on 24.11.2015.
  */
 
-<<<<<<< HEAD
 /*function Cart(sSelector) {
 
  }*/
@@ -34,14 +33,14 @@ function Cart(sSelector, sCartSelector) {
 //11111
         f.showHideCart = function () {
             f.list.toggle();
-
         };
+
         f.button.bind('click', f.showHideCart);
         ///111
 
         f.elem.find('.b-order-form').submit(function (event) {
             event.preventDefault();
-           // alert($(this).attr('class'));
+            // alert($(this).attr('class'));
             f.add($(this))
         });
 
@@ -88,7 +87,7 @@ function Cart(sSelector, sCartSelector) {
     f.changeQuantity = function (oBtn, iShift) {
         var quantityTextField = $(oBtn).siblings('.b-order-form__quantity');
 
-        currentQuantity = parseInt(quantityTextField.val()) + iShift;
+        var currentQuantity = parseInt(quantityTextField.val()) + iShift;
         if (currentQuantity > 0) {
             quantityTextField.val(currentQuantity);
         }
@@ -100,9 +99,9 @@ function Cart(sSelector, sCartSelector) {
     f.bindMinicartEvents = function (newGood) {
 
         newGood.find('.b-good__delete').bind('click', f.del).end()
-            .find('.b-order-form__plus').bind('click', f.increaseQuantity()).end()
-            .find('.b-order-form__minus').bind('click', f.decreaseQuantity()).end()
-            .find('.b-order-form').bind('submit', f.add.end();
+            .find('.b-order-form__plus').bind('click', f.increaseQuantity).end()
+            .find('.b-order-form__minus').bind('click', f.decreaseQuantity).end()
+            .find('.b-order-form').bind('submit', f.add).end();
 
 
     };
@@ -117,15 +116,15 @@ function Cart(sSelector, sCartSelector) {
     };
 
 
-    f.get_event_val = function (event) {
-        return $(event).siblings('.b-order-form__quantity').val();
-    };
+    /*f.get_event_val = function (event) {
+     return $(event).siblings('.b-order-form__quantity').val();
+     };*/
 
-    f.get_match_elem = function (event) {
-        var currEv = $(event).closest('.b-good');
-        var currEvId = currEv.attr('class').match(/b-good_id_(\d{1,7})/)[1];
-        return f.elem.find('.b-good_id_' + currEvId);
-    };
+    /*  f.get_match_elem = function (event) {
+     var currEv = $(event).closest('.b-good');
+     var currEvId = currEv.attr('class').match(/b-good_id_(\d{1,7})/)[1];
+     return f.elem.find('.b-good_id_' + currEvId);
+     };*/
 
     f.add = function (event) {
         // f.order_form_plus = f.list.find('.b-order-form__plus' );
@@ -142,7 +141,6 @@ function Cart(sSelector, sCartSelector) {
     f.put = function (currentGood) {
         var addedGood = new Good(currentGood);
 
-        f.bindMinicartEvents(newGood);
 
         currentGood.addClass('b-good_in-cart');
 
@@ -160,58 +158,61 @@ function Cart(sSelector, sCartSelector) {
             f.copyData(currentGood, newGood, ['.b-good__image', '.b-good__name', '.b-order-form__quantity']);
             f.list.find('.b-goods').append(newGood);
 
-            //f.list_forms =  f.list.find('.b-order-form');
-            newGood.find('.b-order-form__plus').click(function (event) {
-                var form_quantity = f.get_event_val($(this));
-                form_quantity++;
-                var elem = f.get_match_elem($(this));
-                elem.find('.b-order-form__quantity').val(form_quantity);
-                f.add(elem);
-
-            });
-
-            newGood.find('.b-order-form__minus').click(function (event) {
-                var form_quantity = f.get_event_val($(this));
-                form_quantity == 1 ? form_quantity : form_quantity--;
-                var elem = f.get_match_elem($(this));
-                elem.find('.b-order-form__quantity').val(form_quantity);
-                f.add(elem);
-            });
-
-
-            newGood.find('.b-order-form').submit(function (event) {
-                event.preventDefault();
-                //alert('hi')
-                currentGood.removeClass('b-good_in-cart');
-                newGood.removeClass(good_id_class);
-                newGood.remove();
-
-
-                // alert(f.elem.find('.b-good_in-cart').length)
-                if (f.elem.find('.b-good_in-cart').length < 1) {
-                    f.cart.find('.b-minicart__list').slideUp()
-                }
-                ;
-
-            });
-
-
-            if (f.list.length >= 1) {
-                f.list.slideDown();
-            } else {
-                f.list.slideUp()
-            }
-            ;
-
+            //f.bindMinicartEvents(newGood);
             f.bindMinicartEvents(!newGood ? existingGood : newGood);
-        }
-        return addedGood
 
+            //f.list_forms =  f.list.find('.b-order-form');
+            /* newGood.find('.b-order-form__plus').click(function (event) {
+             var form_quantity = f.get_event_val($(this));
+             form_quantity++;
+             var elem = f.get_match_elem($(this));
+             elem.find('.b-order-form__quantity').val(form_quantity);
+             f.add(elem);
+
+             });*/
+
+            /* newGood.find('.b-order-form__minus').click(function (event) {
+             var form_quantity = f.get_event_val($(this));
+             form_quantity == 1 ? form_quantity : form_quantity--;
+             var elem = f.get_match_elem($(this));
+             elem.find('.b-order-form__quantity').val(form_quantity);
+             f.add(elem);
+             });
+
+
+             newGood.find('.b-order-form').submit(function (event) {
+             event.preventDefault();
+             //alert('hi')
+             currentGood.removeClass('b-good_in-cart');
+             newGood.removeClass(good_id_class);
+             newGood.remove();*/
+
+
+            // alert(f.elem.find('.b-good_in-cart').length)
+            /* if (f.elem.find('.b-good_in-cart').length < 1) {
+             f.cart.find('.b-minicart__list').slideUp()
+             }
+             ;*/
+
+        }
+
+
+        /*if (f.list.length >= 1) {
+         f.list.slideDown();
+         } else {
+         f.list.slideUp()
+         }
+         ;*/
+
+
+        return addedGood
     };
+
 
     f.load = function () {
 
-        f.goods = $.cookie('cartGoods'); alert('load'+f.goods.length);
+        f.goods = $.cookie('cartGoods');
+        alert('load' + f.goods.length);
         if (f.goods) {
 
             $.each(f.goods, function (good_id, quantity) {
@@ -225,27 +226,19 @@ function Cart(sSelector, sCartSelector) {
 
 
     $(document).ready(function () {
-         alert('f.main')
+        alert('f.main')
         f.main();
-       // f.load();
+        f.load();
 
 
     });
-=======
-function Cart(sSelector, sCartSelector) {
->>>>>>> parent of b74f980... init ok
 
 
-<<<<<<< HEAD
-=======
-function Cart2(sSelector) {
-    var cart = new Cart(sSelector, '');
-    var component = new Component(sSelector);
->>>>>>> parent of b74f980... init ok
-}
+};
 
 
-$(document).ready(function(){
-    var cart2 = new Cart2('#minicart1');
-    alert('hi')
-})
+
+
+
+
+

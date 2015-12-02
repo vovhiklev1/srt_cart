@@ -1,9 +1,4 @@
-
 <!--<?
-=======
-
-<?
->>>>>>> parent of b74f980... init ok:www/templates/cart.html
 header("Content-Type: text/html;charset=UTF-8");
 ?>-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
@@ -125,6 +120,9 @@ header("Content-Type: text/html;charset=UTF-8");
 
 <script type="text/javascript" src="../scripts/component.js"></script>
 <script type="text/javascript" src="../scripts/main.js"></script>
-<script> alert('run')</script>
+<script>
+    Cart.prototype = new Component();
+    var cart = new Cart('#goods1', '#minicart1');
+</script>
 </body>
 </html>

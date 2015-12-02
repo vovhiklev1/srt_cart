@@ -7,11 +7,7 @@ function Component(sSelector) {
     this.init = function (sSelector) {
         this.elem = $(sSelector);
         if (!this.elem.length) {
-<<<<<<< HEAD
-            console.log('Error Component init ' + sSelector)
-=======
-            console.log('Error Component init ')
->>>>>>> parent of b74f980... init ok
+           // console.log('Error Component init ' + sSelector)
         }
         else {
             console.log('Component init OK:' + this.elem.length)
